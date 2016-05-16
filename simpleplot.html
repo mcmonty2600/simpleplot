@@ -1,0 +1,84 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>simpleplot</title>
+  <style>
+  </style>
+</head>
+<body>
+  <canvas id="mycanvas1" width="500" height="250" style="width:500px; height:250px; background-color:#222;"></canvas>
+  <br>
+  <canvas id="mycanvas2" width="500" height="250" style="width:500px; height:250px"></canvas>
+  <script src="src/simpleplot.js"></script>
+</body>
+
+<script>
+var example = (function () {
+  data = [2,3,5,4,0,8,7,6,4,3,4,3,2,5,1,0,4,15,9];
+  data2 = [9,12,5,8];
+  var c1 = document.getElementById("mycanvas1");
+  var c2 = document.getElementById("mycanvas2");
+
+  simpleplot(
+    c1, data2, {
+    plotType:"bar",
+    font:"bold 14px Arial",
+    xStart:50,
+    yStart:c1.height-50,
+    width:c1.width-100,
+    height:c1.height-100,
+    numPoints:data2.length,
+    displayAxes:false,
+    axes:{color:"#888",thickness:2},
+    displayCaption:false,
+    caption:{text :"my data", color:'#ed0'},
+    displayPoints:false,
+    points:{color:"rgba(0,0,0,0)",radius:null},
+    displayLines:true,
+    lines:{color:"rgba(100,100,100,0.5)",thickness:50},
+    displayValues:true,
+    values:{
+      color:'#ccc',
+      formatValuesFunction : function(float_val){return float_val.toFixed(2); }
+    },
+    enableHover:true,
+    hover:{
+      color:null,
+      formatHoverInfoFunction:null
+    }
+  });
+
+  simpleplot(
+    c1, data, {
+    plotType:'',
+    font:"bold 12px Arial",
+    xStart:50,
+    yStart:c1.height-50,
+    width:c1.width-100,
+    height:c1.height-100,
+    numPoints:data.length,
+    displayAxes:true,
+    axes:{color:"#888",thickness:2},
+    displayCaption:true,
+    caption:{text :"my data", color:'#ed0'},
+    displayPoints : true,
+    points:{color:"#0f0",radius:6},
+    displayLines:true,
+    lines:{color:"#888",thickness:5},
+    displayValues:false,
+    values:{
+      color:'#ccc',
+      formatValuesFunction:null
+    },
+    enableHover:true,
+    hover:{
+      color:'yellow',
+      formatHoverInfoFunction : function(x,y){return "(" + x + ", " + y + ")";}
+    }
+  });
+
+  simpleplot(c2, data);
+
+})();
+</script>
+</html>
