@@ -33,7 +33,7 @@ var simpleplot = function (canvas, arr, customOptions) {
     },
     displayPoints : true,
     points : {
-      color: '#0f0',
+      color: '#0c0',
       radius : 6
     },
     displayLines : true,
@@ -44,12 +44,21 @@ var simpleplot = function (canvas, arr, customOptions) {
     displayValues:false,
     values : {
       color : '#444',
-      formatValuesFunction : null
+      formatValuesFunction : undefined
+    },
+    enableTargetLine : false,
+    target : {
+      value : undefined,
+      lineColor : '#444',
+      lineWidth : 2,
+      colorOverTarget : '#0c0',
+      colorUnderTarget : '#f00',
+      formatTargetValueFunction : undefined
     },
     enableHover : true,
     hover : {
       color:'yellow',
-      formatHoverInfoFunction : null
+      formatHoverInfoFunction : undefined
     }
   };
 
@@ -71,7 +80,7 @@ var simpleplot = function (canvas, arr, customOptions) {
     var y = options.yStart;
     var w = options.width;
     var h = options.height;
-    if (ctx.font != null) ctx.font = options.font;
+    if (options.font != undefined) ctx.font = options.font;
 
     ctx.lineJoin = 'round';
     // Plot axes
@@ -84,22 +93,25 @@ var simpleplot = function (canvas, arr, customOptions) {
       ctx.lineTo(options.xStart + w, options.yStart);
       ctx.stroke();
     }
+    if (options.target.value === undefined) {
+      options.enableTargetLine = false;
+    }
     // Scale the array to the plot height
     var max = Math.max.apply(Math,arr);
+    if (options.enableTargetLine && options.target.value > max) {
+      max = options.target.value;
+    }
     var min = 0;
     var arrScaled = [];
-    for (var i=0; i < arr.length; i++)
+    for (var i=0; i < arr.length; i++) {
       arrScaled[i] = (h*(arr[i]-min)/(max-min));
+    }
     // Draw caption
     if (options.displayCaption) {
       ctx.fillStyle = options.caption.color;
       ctx.fillText(options.caption.text,options.xStart,options.yStart+10);
     }
-    // Plot data
-    ctx.strokeStyle = options.lines.color;
-    ctx.lineWidth = options.lines.thickness;
-    ctx.beginPath();
-    ctx.moveTo(options.xStart +T*0,  y - arrScaled[0]);
+    // Build text to display
     for (i = 0; i < arr.length; i++) {
       if (typeof(options.values.formatValuesFunction) == "function") {
         arrString[i] = options.values.formatValuesFunction(arr[i])
@@ -108,6 +120,12 @@ var simpleplot = function (canvas, arr, customOptions) {
         arrString[i] = arr[i].toString();
       }
     }
+    // Plot data
+    ctx.strokeStyle = options.lines.color;
+    ctx.lineWidth = options.lines.thickness;
+    ctx.beginPath();
+    ctx.moveTo(options.xStart +T*0,  y - arrScaled[0]);
+    // Plot lines
     if (options.displayLines) {
       for (i = 0; i < arr.length; i++) {
         if (options.plotType.indexOf("bar")>=0)
@@ -127,9 +145,19 @@ var simpleplot = function (canvas, arr, customOptions) {
     // plot data points
     if (options.displayPoints) {
       for (i = 0; i < arr.length; i++) {
+        if (options.enableTargetLine){
+          if (arr[i] > options.target.value) {
+            ctx.fillStyle = options.target.colorOverTarget;
+          }
+          else {
+            ctx.fillStyle = options.target.colorUnderTarget;
+          }
+        }
+        else {
+          ctx.fillStyle = options.points.color;
+        }
         ctx.moveTo(options.xStart +T*i+options.points.radius,  y - arrScaled[i]);
         ctx.beginPath();
-        ctx.fillStyle = options.points.color;
         ctx.arc(options.xStart+T*i,  y - arrScaled[i], options.points.radius, 0, 2 * Math.PI);
         ctx.fill();
         // build up array of drawn objects with position and value information
@@ -141,6 +169,22 @@ var simpleplot = function (canvas, arr, customOptions) {
         }
         canvasHoverObjects[i] = {x:options.xStart+T*i, y:y-arrScaled[i], w:options.points.radius, h:options.points.radius, value:hoverText}
       }
+    }
+    if (options.enableTargetLine) {
+      var scaledTargetValue = (h*(options.target.value-min)/(max-min));
+      ctx.strokeStyle = options.target.lineColor;
+      ctx.lineWidth = options.target.lineWidth;
+      ctx.moveTo(options.xStart,  y - scaledTargetValue);
+      ctx.lineTo(options.xStart + w,  y - scaledTargetValue);
+      if (typeof(options.target.formatTargetValueFunction) == "function") {
+        var targetValueString = options.target.formatTargetValueFunction(options.target.value);
+      }
+      else {
+        var targetValueString = options.target.value;
+      }
+      ctx.fillStyle = options.values.color;
+      ctx.fillText(targetValueString, options.xStart + w - 30,  y - scaledTargetValue - 10);
+      ctx.stroke();
     }
     // add event listener for mouse hover over data points
     if (options.enableHover){

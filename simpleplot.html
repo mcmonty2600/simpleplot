@@ -9,6 +9,8 @@
   <canvas id="mycanvas1" width="500" height="250" style="width:500px; height:250px; background-color:#222;"></canvas>
   <br>
   <canvas id="mycanvas2" width="500" height="250" style="width:500px; height:250px"></canvas>
+  <br>
+  <canvas id="mycanvas3" width="500" height="250" style="width:500px; height:250px; background-color:#222;"></canvas>
   <script src="src/simpleplot.js"></script>
 </body>
 
@@ -18,9 +20,9 @@ var example = (function () {
   data2 = [9,12,5,8];
   var c1 = document.getElementById("mycanvas1");
   var c2 = document.getElementById("mycanvas2");
+  var c3 = document.getElementById("mycanvas3");
 
-  simpleplot(
-    c1, data2, {
+  simpleplot( c1, data2, {
     plotType:"bar",
     font:"bold 14px Arial",
     xStart:50,
@@ -48,8 +50,7 @@ var example = (function () {
     }
   });
 
-  simpleplot(
-    c1, data, {
+  simpleplot(c1, data, {
     plotType:'',
     font:"bold 12px Arial",
     xStart:50,
@@ -78,6 +79,20 @@ var example = (function () {
   });
 
   simpleplot(c2, data);
+
+  simpleplot(c3, data, {
+    enableTargetLine:true,
+    target : {
+      value : 5,
+      lineColor : '#444',
+      lineWidth : 2,
+      colorOverTarget : '#0c0',
+      colorUnderTarget : '#f00',
+      formatTargetValueFunction : function(val){return "target = " + val;}
+    },
+  });
+
+
 
 })();
 </script>
