@@ -1,7 +1,7 @@
 
 /*
 todo
--  fix the offset of caption and axisLabels based on size of font. Or else leave caption and axis labels up to user?
+-  fix the offset of caption, axisLabels, and target based on size of font. Or else leave caption and axis labels up to user?
 - what happens to event listeners when simpleplots are refreshed? add a way to just update data?
 */
 
@@ -29,7 +29,7 @@ var simpleplot = function (canvas, arr, customOptions) {
     displayCaption : false,
     caption : {
       text : '',
-      color : '#888'
+      textColor : '#888'
     },
     displayPoints : true,
     points : {
@@ -43,7 +43,7 @@ var simpleplot = function (canvas, arr, customOptions) {
     },
     displayValues:false,
     values : {
-      color : '#444',
+      textColor : '#888',
       formatValuesFunction : undefined
     },
     enableTargetLine : false,
@@ -52,7 +52,8 @@ var simpleplot = function (canvas, arr, customOptions) {
       lineColor : '#444',
       lineWidth : 2,
       colorOverTarget : '#0c0',
-      colorUnderTarget : '#f00',
+      colorUnderTarget : '#ef1e25',
+      textColor : '#888',
       formatTargetValueFunction : undefined
     },
     enableHover : true,
@@ -108,7 +109,7 @@ var simpleplot = function (canvas, arr, customOptions) {
     }
     // Draw caption
     if (options.displayCaption) {
-      ctx.fillStyle = options.caption.color;
+      ctx.fillStyle = options.caption.textColor;
       ctx.fillText(options.caption.text,options.xStart,options.yStart+10);
     }
     // Build text to display
@@ -133,7 +134,7 @@ var simpleplot = function (canvas, arr, customOptions) {
         ctx.lineTo(options.xStart +T*i,  y - arrScaled[i]); // draw line from last data point to this data point
         ctx.stroke();
         if(options.displayValues) {
-          ctx.fillStyle = options.values.color;
+          ctx.fillStyle = options.values.textColor;
           if (options.plotType.indexOf("bar")>=0)
             ctx.fillText(arrString[i],options.xStart+T*i-options.lines.thickness/2,y - arrScaled[i]);
           else
@@ -174,16 +175,17 @@ var simpleplot = function (canvas, arr, customOptions) {
       var scaledTargetValue = (h*(options.target.value-min)/(max-min));
       ctx.strokeStyle = options.target.lineColor;
       ctx.lineWidth = options.target.lineWidth;
+      ctx.beginPath();
       ctx.moveTo(options.xStart,  y - scaledTargetValue);
       ctx.lineTo(options.xStart + w,  y - scaledTargetValue);
-      if (typeof(options.target.formatTargetValueFunction) == "function") {
+      if (typeof(options.target.formatTargetValueFunction) === "function") {
         var targetValueString = options.target.formatTargetValueFunction(options.target.value);
       }
       else {
         var targetValueString = options.target.value;
       }
-      ctx.fillStyle = options.values.color;
-      ctx.fillText(targetValueString, options.xStart + w - 30,  y - scaledTargetValue - 10);
+      ctx.fillStyle = options.target.textColor;
+      ctx.fillText(targetValueString, options.xStart + w - 80,  y - scaledTargetValue - 4);
       ctx.stroke();
     }
     // add event listener for mouse hover over data points
@@ -201,7 +203,7 @@ var simpleplot = function (canvas, arr, customOptions) {
             {
               cursorOnObject = true;
               ctx.putImageData(imageOriginal,0,0);
-              ctx.fillStyle = options.values.color;
+              ctx.fillStyle = options.values.textColor;
               ctx.fillText(canvasHoverObjects[i].value,canvasHoverObjects[i].x,canvasHoverObjects[i].y-10);
               ctx.fillStyle = options.hover.color;
               ctx.beginPath();

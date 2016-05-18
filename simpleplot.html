@@ -3,14 +3,29 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>simpleplot</title>
   <style>
+  body
+  {
+      width:80%;
+      margin-top:3em;
+      margin-left:auto;
+      margin-right:auto;
+      font: 16px arial, sans-serif;
+      color: #222; /*font color*/
+  }
+  p {
+    margin-top:3em;
+    margin-bottom:6px;
+  }
   </style>
 </head>
 <body>
+  <h2>simpleplot demo</h2>
+  <p>Plot with a target line</p>
   <canvas id="mycanvas1" width="500" height="250" style="width:500px; height:250px; background-color:#222;"></canvas>
-  <br>
-  <canvas id="mycanvas2" width="500" height="250" style="width:500px; height:250px"></canvas>
-  <br>
-  <canvas id="mycanvas3" width="500" height="250" style="width:500px; height:250px; background-color:#222;"></canvas>
+  <p>Two plots superimposed</p>
+  <canvas id="mycanvas2" width="500" height="250" style="width:500px; height:250px; background-color:#222;"></canvas>
+  <p>This is a plot with no canvas formatting or plot parameters</p>
+  <canvas id="mycanvas3" width="500" height="250" style="width:500px; height:250px;"></canvas>
   <script src="src/simpleplot.js"></script>
 </body>
 
@@ -22,7 +37,26 @@ var example = (function () {
   var c2 = document.getElementById("mycanvas2");
   var c3 = document.getElementById("mycanvas3");
 
-  simpleplot( c1, data2, {
+  // plot with target line
+  simpleplot(c1, data, {
+    enableTargetLine:true,
+    target : {
+      value : 5,
+      lineColor : '#444',
+      lineWidth : 2,
+      colorOverTarget : '#0c0',
+      colorUnderTarget : '#f00',
+      textColor : '#ed0',
+      formatTargetValueFunction : function(val){return "target = " + val;}
+    },
+    displayValues:false,
+    values : {
+      textColor : '#ccc'
+    },
+  });
+
+  // two plots superimposed, and axes drawn
+  simpleplot( c2, data2, {
     plotType:"bar",
     font:"bold 14px Arial",
     xStart:50,
@@ -33,14 +67,14 @@ var example = (function () {
     displayAxes:false,
     axes:{color:"#888",thickness:2},
     displayCaption:false,
-    caption:{text :"my data", color:'#ed0'},
+    caption:{text :"my data", textColor:'#ed0'},
     displayPoints:false,
     points:{color:"rgba(0,0,0,0)",radius:null},
     displayLines:true,
     lines:{color:"rgba(100,100,100,0.5)",thickness:50},
     displayValues:true,
     values:{
-      color:'#ccc',
+      textColor:'#ccc',
       formatValuesFunction : function(float_val){return float_val.toFixed(2); }
     },
     enableHover:true,
@@ -50,7 +84,7 @@ var example = (function () {
     }
   });
 
-  simpleplot(c1, data, {
+  simpleplot(c2, data, {
     plotType:'',
     font:"bold 12px Arial",
     xStart:50,
@@ -61,14 +95,14 @@ var example = (function () {
     displayAxes:true,
     axes:{color:"#888",thickness:2},
     displayCaption:true,
-    caption:{text :"my data", color:'#ed0'},
+    caption:{text :"my data", textColor:'#ed0'},
     displayPoints : true,
     points:{color:"#0f0",radius:6},
     displayLines:true,
     lines:{color:"#888",thickness:5},
     displayValues:false,
     values:{
-      color:'#ccc',
+      textColor:'#ccc',
       formatValuesFunction:null
     },
     enableHover:true,
@@ -78,19 +112,9 @@ var example = (function () {
     }
   });
 
-  simpleplot(c2, data);
+  // This is a plot with no canvas formatting or plot parameters
+  simpleplot(c3, data);
 
-  simpleplot(c3, data, {
-    enableTargetLine:true,
-    target : {
-      value : 5,
-      lineColor : '#444',
-      lineWidth : 2,
-      colorOverTarget : '#0c0',
-      colorUnderTarget : '#f00',
-      formatTargetValueFunction : function(val){return "target = " + val;}
-    },
-  });
 
 
 
