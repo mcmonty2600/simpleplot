@@ -9,7 +9,7 @@ Sample implemenations: http://mcmonty2600.github.io/simpleplot/
 ![image failed to load](screenshots/plot1.PNG "An example with two plot types superimposed on same canvas")
 ![image failed to load](screenshots/plot2.PNG "An example with a threshold line")
 
-### Details
+### Basic Example
 
 Create a simple data plot by passing in a canvas element and an array of numbers. 
 ```
