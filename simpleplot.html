@@ -20,9 +20,9 @@
 </head>
 <body>
   <h2>simpleplot demo</h2>
-  <p>Plot with a target line</p>
+  <p>Plot with a threshold line</p>
   <canvas id="mycanvas1" width="500" height="250" style="width:500px; height:250px; background-color:#222;"></canvas>
-  <p>Two plots superimposed</p>
+  <p>Two plots superimposed (bar and line plot)</p>
   <canvas id="mycanvas2" width="500" height="250" style="width:500px; height:250px; background-color:#222;"></canvas>
   <p>This is a plot with no canvas formatting or plot parameters</p>
   <canvas id="mycanvas3" width="500" height="250" style="width:500px; height:250px;"></canvas>
@@ -31,23 +31,23 @@
 
 <script>
 var example = (function () {
-  data = [2,3,5,4,0,8,7,6,4,3,4,3,2,5,1,0,4,15,9];
+  data = [2,3,5,4,1,8,7,6,4,3,4,3,2,4,1,0,4,15,9];
   data2 = [9,12,5,8];
   var c1 = document.getElementById("mycanvas1");
   var c2 = document.getElementById("mycanvas2");
   var c3 = document.getElementById("mycanvas3");
 
-  // plot with target line
+  // plot with threshold line
   simpleplot(c1, data, {
-    enableTargetLine:true,
-    target : {
+    enableThresholdLine:true,
+    threshold : {
       value : 5,
       lineColor : '#444',
       lineWidth : 2,
-      colorOverTarget : '#0c0',
-      colorUnderTarget : '#f00',
+      colorOverThreshold : '#0c0',
+      colorUnderThreshold : '#f00',
       textColor : '#ed0',
-      formatTargetValueFunction : function(val){return "target = " + val;}
+      formatThresholdValueFunction : function(val){return "threshold = " + val;}
     },
     displayValues:false,
     values : {

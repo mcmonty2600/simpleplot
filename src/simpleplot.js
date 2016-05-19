@@ -1,7 +1,7 @@
 
 /*
 todo
--  fix the offset of caption, axisLabels, and target based on size of font. Or else leave caption and axis labels up to user?
+-  fix the offset of caption, axisLabels, and threshold based on size of font. Or else leave caption and axis labels up to user?
 - what happens to event listeners when simpleplots are refreshed? add a way to just update data?
 */
 
@@ -46,15 +46,15 @@ var simpleplot = function (canvas, arr, customOptions) {
       textColor : '#888',
       formatValuesFunction : undefined
     },
-    enableTargetLine : false,
-    target : {
+    enableThresholdLine : false,
+    threshold : {
       value : undefined,
       lineColor : '#444',
       lineWidth : 2,
-      colorOverTarget : '#0c0',
-      colorUnderTarget : '#ef1e25',
+      colorOverThreshold : '#0c0',
+      colorUnderThreshold : '#ef1e25',
       textColor : '#888',
-      formatTargetValueFunction : undefined
+      formatThresholdValueFunction : undefined
     },
     enableHover : true,
     hover : {
@@ -94,13 +94,13 @@ var simpleplot = function (canvas, arr, customOptions) {
       ctx.lineTo(options.xStart + w, options.yStart);
       ctx.stroke();
     }
-    if (options.target.value === undefined) {
-      options.enableTargetLine = false;
+    if (options.threshold.value === undefined) {
+      options.enableThresholdLine = false;
     }
     // Scale the array to the plot height
     var max = Math.max.apply(Math,arr);
-    if (options.enableTargetLine && options.target.value > max) {
-      max = options.target.value;
+    if (options.enableThresholdLine && options.threshold.value > max) {
+      max = options.threshold.value;
     }
     var min = 0;
     var arrScaled = [];
@@ -146,12 +146,12 @@ var simpleplot = function (canvas, arr, customOptions) {
     // plot data points
     if (options.displayPoints) {
       for (i = 0; i < arr.length; i++) {
-        if (options.enableTargetLine){
-          if (arr[i] > options.target.value) {
-            ctx.fillStyle = options.target.colorOverTarget;
+        if (options.enableThresholdLine){
+          if (arr[i] > options.threshold.value) {
+            ctx.fillStyle = options.threshold.colorOverThreshold;
           }
           else {
-            ctx.fillStyle = options.target.colorUnderTarget;
+            ctx.fillStyle = options.threshold.colorUnderThreshold;
           }
         }
         else {
@@ -171,21 +171,21 @@ var simpleplot = function (canvas, arr, customOptions) {
         canvasHoverObjects[i] = {x:options.xStart+T*i, y:y-arrScaled[i], w:options.points.radius, h:options.points.radius, value:hoverText}
       }
     }
-    if (options.enableTargetLine) {
-      var scaledTargetValue = (h*(options.target.value-min)/(max-min));
-      ctx.strokeStyle = options.target.lineColor;
-      ctx.lineWidth = options.target.lineWidth;
+    if (options.enableThresholdLine) {
+      var scaledThresholdValue = (h*(options.threshold.value-min)/(max-min));
+      ctx.strokeStyle = options.threshold.lineColor;
+      ctx.lineWidth = options.threshold.lineWidth;
       ctx.beginPath();
-      ctx.moveTo(options.xStart,  y - scaledTargetValue);
-      ctx.lineTo(options.xStart + w,  y - scaledTargetValue);
-      if (typeof(options.target.formatTargetValueFunction) === "function") {
-        var targetValueString = options.target.formatTargetValueFunction(options.target.value);
+      ctx.moveTo(options.xStart,  y - scaledThresholdValue);
+      ctx.lineTo(options.xStart + w,  y - scaledThresholdValue);
+      if (typeof(options.threshold.formatThresholdValueFunction) === "function") {
+        var thresholdValueString = options.threshold.formatThresholdValueFunction(options.threshold.value);
       }
       else {
-        var targetValueString = options.target.value;
+        var thresholdValueString = options.threshold.value;
       }
-      ctx.fillStyle = options.target.textColor;
-      ctx.fillText(targetValueString, options.xStart + w - 80,  y - scaledTargetValue - 4);
+      ctx.fillStyle = options.threshold.textColor;
+      ctx.fillText(thresholdValueString, options.xStart + w - 100,  y - scaledThresholdValue - 4);
       ctx.stroke();
     }
     // add event listener for mouse hover over data points
