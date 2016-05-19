@@ -3,3 +3,5 @@ Javascript module to create simple plots. Optionally add a threshold line; point
 
 ## Demo
 
+http://mcmonty2600.github.io/simpleplot/
+
