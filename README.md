@@ -11,7 +11,7 @@ Sample implemenations: http://mcmonty2600.github.io/simpleplot/
 
 ### Basic Example
 
-Create a simple data plot by passing in a canvas element and an array of numbers. 
+In the simplest case, a data plot is created by passing in a canvas element and an array of numbers, without additional configuration parameters 
 ```
 <script>
   data = [2,3,5,4,1,8,7]];
@@ -22,7 +22,7 @@ Create a simple data plot by passing in a canvas element and an array of numbers
 
 ### Configuration 
 
-Each simpleplot can be customized by passing in configuration parameters to overwrite default values.
+Each simpleplot istance can be customized by passing in configuration parameters to overwrite default values.
 
 | Parameter | Default | Description |
 | ------------- | ------------- | ------------- |
