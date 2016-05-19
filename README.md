@@ -5,7 +5,7 @@ Sample implemenations: http://mcmonty2600.github.io/simpleplot/
 
 ### Screenshots
 
-![image failed to load](screenshots/plot1.png "An example with two plot types superimposed on same canvas")
+![image failed to load](screenshots/plot1.PNG "An example with two plot types superimposed on same canvas")
 
 ### Details
 
