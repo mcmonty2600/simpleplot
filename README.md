@@ -24,7 +24,8 @@ Each simpleplot can be customized by passing in configuration parameters to over
 | yStart   | canvas.height-10 | y start location with respect to canvas element |
 | width    | canvas.width-20  | width in pixels  |
 | height   | canvas.height-20 | height in pixels |
-| numPoints | array length | number of points to plot (can be greater than length of array |
-| displayAxes | false  | show x- and y- axes |
-
-
+| numPoints | array length | number of points to plot (can be greater than length of array) |
+| displayAxes | false  | boolean: show x- and y- axes |
+| axes | object | object with color and line thickness of axes, default is ```{color : '#888', thickness : 2}``` |
+| displayCaption | false | boolean: display plot caption |
+| caption | object | object with text and text color, default is : ```{text : '', textColor : '#888'},``` |
