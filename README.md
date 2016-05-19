@@ -1,11 +1,13 @@
 ## simpleplot
-Javascript module to create simple plots. Optionally add a threshold line; points above the threshold can be colored differently than below. This is useful if you want to indicate which datapoints reach a certain target level (e.g., how many push-ups you performed per day)
+Javascript module to create simple interactive plots. 
+Optionally add a threshold line; points above the threshold can be colored differently than below. This is useful if you want to indicate which datapoints reach a certain target level (e.g., how many push-ups you performed per day)
 
 Sample implemenations: http://mcmonty2600.github.io/simpleplot/
 
 ### Screenshots
 
 ![image failed to load](screenshots/plot1.PNG "An example with two plot types superimposed on same canvas")
+![image failed to load](screenshots/plot2.PNG "An example with a threshold line")
 
 ### Details
 
@@ -16,6 +18,8 @@ Create a simple data plot by passing in a canvas element and an array of numbers
   simpleplot(c3, data);
 </script>
 ```
+![image failed to load](screenshots/plot_plain.PNG "basic plot without parameters and no canvas formatting")
+
 ### Configuration 
 
 Each simpleplot can be customized by passing in configuration parameters to overwrite default values.
