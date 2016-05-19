@@ -6,12 +6,12 @@ Sample implemenations: http://mcmonty2600.github.io/simpleplot/
 ### Details
 
 Create a simple data plot by passing in a canvas element and an array of numbers. 
-'''
+```
 <script>
   data = [2,3,5,4,1,8,7]];
   simpleplot(c3, data);
 </script>
-'''
+```
 ### Configuration 
 
 Each simpleplot instance can be customized by passing in configuration parameters to overwrite default values.
