@@ -3,6 +3,10 @@ Javascript module to create simple plots. Optionally add a threshold line; point
 
 Sample implemenations: http://mcmonty2600.github.io/simpleplot/
 
+### Screenshots
+
+![image failed to load](screenshots/plot1.png "An example with two plot types superimposed on same canvas")
+
 ### Details
 
 Create a simple data plot by passing in a canvas element and an array of numbers. 
