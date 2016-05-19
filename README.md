@@ -26,6 +26,6 @@ Each simpleplot can be customized by passing in configuration parameters to over
 | height   | canvas.height-20 | height in pixels |
 | numPoints | array length | number of points to plot (can be greater than length of array) |
 | displayAxes | false  | boolean: show x- and y- axes |
-| axes | object | object with color and line thickness of axes, default is ```{color : '#888', thickness : 2}``` |
+| axes | object | object with color and line thickness of axes, default: ```{color : '#888', thickness : 2}``` |
 | displayCaption | false | boolean: display plot caption |
-| caption | object | object with text and text color, default is : ```{text : '', textColor : '#888'},``` |
+| caption | object | object with text and text color, default: ```{text : '', textColor : '#888'},``` |
