@@ -23,8 +23,8 @@ Each simpleplot can be customized by passing in configuration parameters to over
 | xStart   | 10               | x start location with respect to canvas element |
 | yStart   | canvas.height-10 | y start location with respect to canvas element |
 | width    | canvas.width-20  | width in pixels  |
-| numPoints | array length |
-| displayAxes | false  |
+| height   | canvas.height-20 | height in pixels |
+| numPoints | array length | number of points to plot (can be greater than length of array |
+| displayAxes | false  | show x- and y- axes |
 
 
-| height   | integer | canvas.height-20 | height in pixels |
