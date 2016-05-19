@@ -29,7 +29,7 @@ Each simpleplot can be customized by passing in configuration parameters to over
 | axes | object | object with color and line thickness of axes, default: ```{color : '#888', thickness : 2}``` |
 | displayCaption | false | boolean: display plot caption |
 | caption | object | object with text and text color, default: ```{text : '', textColor : '#888'},``` |
-| displayPoints : true | |
+| displayPoints | true | |
 | points | object | {color: '#0c0', radius : 6} |
 | displayLines | true | | 
 | lines | object | {color: '#888', thickness: 6} |
