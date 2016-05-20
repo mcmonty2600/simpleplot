@@ -1,5 +1,8 @@
 ## simpleplot
-Javascript module to create simple interactive plots. 
+Javascript module to create simple plots.
+- No dependencies
+- Interactive (hover over data point for value)
+- Customizable
 Optionally add a threshold line; points above the threshold can be colored differently than below. This is useful if you want to indicate which datapoints reach a certain target level (e.g., how many push-ups you performed per day)
 
 Sample implemenations: http://mcmonty2600.github.io/simpleplot/
@@ -33,8 +36,10 @@ Each simpleplot istance can be customized by passing in configuration parameters
 | width    | canvas.width-20  | width in pixels  |
 | height   | canvas.height-20 | height in pixels |
 | numPoints | array length | number of points to plot (can be greater than length of array) |
-| axes | object | object with color and line thickness of axes, default: ```{enable : false, color : '#888', thickness : 2}``` |
-| caption | object | object with text and text color, default: ```{enable : false, text : '', textColor : '#888'},``` |
-| points | object | ```{enable : true, color: '#0c0', radius : 6}``` |
-| lines | object | ```{enable : true, color: '#888', thickness: 6}``` |
-| values | object | ```{enable : false, textColor : '#888', formatValuesFunction : undefined}``` |
+| axes | object | object with color and line thickness of axes, default: ```{enable:false, color:'#888', thickness:2}``` |
+| caption | object | object with text and text color, default: ```{enable:false, text:'', textColor:'#888'}``` |
+| points | object | ```{enable : true, color:'#0c0', radius:6}``` |
+| lines | object | ```{enable:true, color:'#888', thickness:6}``` |
+| values | object | ```{enable:false, textColor:'#888', formatValuesFunction:undefined}``` |
+| threshold | object | see table below |
+| hover | object | ``` enable:true, color:'yellow', formatHoverInfoFunction:undefined``` |
