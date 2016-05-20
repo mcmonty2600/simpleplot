@@ -3,6 +3,7 @@ Javascript module to create simple plots.
 - No dependencies
 - Interactive (hover over data point for value)
 - Customizable
+
 Optionally add a threshold line; points above the threshold can be colored differently than below. This is useful if you want to indicate which datapoints reach a certain target level (e.g., how many push-ups you performed per day)
 
 Sample implemenations: http://mcmonty2600.github.io/simpleplot/
@@ -43,3 +44,20 @@ Each simpleplot istance can be customized by passing in configuration parameters
 | values | object | default: ```{enable:false, textColor:'#888', formatValuesFunction:undefined}``` |
 | threshold | object | see table below |
 | hover | object | default: ``` enable:true, color:'yellow', formatHoverInfoFunction:undefined``` |
+
+
+Optionally add a threshold line to the plot. Points above the threshold can be colored differently than below. Threshold is configurable with the **threshold** parameter object, which has attributes:
+
+| threshold attribute | Default |
+| ------------- | ------------- | 
+| enable | false |
+| value | undefined |
+| lineColor | '#444' |
+| lineWidth | 2 |
+| colorOverThreshold | '#0c0' |
+| colorUnderThreshold | '#ef1e25' |
+| textColor | '#888' |
+| formatThresholdValueFunction | undefined |
+
+
+
