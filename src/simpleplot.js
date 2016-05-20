@@ -21,33 +21,33 @@ var simpleplot = function (canvas, arr, customOptions) {
     width: canvas.width-20,
     height: canvas.height-20,
     numPoints: arr.length,
-    displayAxes:false,
     axes : {
+      enable : false,
       color : '#888',
       thickness : 2
     },
-    displayCaption : false,
     caption : {
+      enable : false,
       text : '',
       textColor : '#888'
     },
-    displayPoints : true,
     points : {
+      enable : true,
       color: '#0c0',
       radius : 6
     },
-    displayLines : true,
     lines : {
+      enable : true,
       color: '#888',
       thickness: 6
     },
-    displayValues:false,
     values : {
+      enable : false,
       textColor : '#888',
       formatValuesFunction : undefined
     },
-    enableThresholdLine : false,
     threshold : {
+      enable : false,
       value : undefined,
       lineColor : '#444',
       lineWidth : 2,
@@ -56,8 +56,8 @@ var simpleplot = function (canvas, arr, customOptions) {
       textColor : '#888',
       formatThresholdValueFunction : undefined
     },
-    enableHover : true,
     hover : {
+      enable : true,
       color:'yellow',
       formatHoverInfoFunction : undefined
     }
@@ -85,7 +85,7 @@ var simpleplot = function (canvas, arr, customOptions) {
 
     ctx.lineJoin = 'round';
     // Plot axes
-    if (options.displayAxes) {
+    if (options.axes.enable) {
       ctx.strokeStyle = options.axes.color;
       ctx.lineWidth = options.axes.thickness;
       ctx.beginPath();
@@ -94,12 +94,9 @@ var simpleplot = function (canvas, arr, customOptions) {
       ctx.lineTo(options.xStart + w, options.yStart);
       ctx.stroke();
     }
-    if (options.threshold.value === undefined) {
-      options.enableThresholdLine = false;
-    }
     // Scale the array to the plot height
     var max = Math.max.apply(Math,arr);
-    if (options.enableThresholdLine && options.threshold.value > max) {
+    if (options.threshold.enable && options.threshold.value > max) {
       max = options.threshold.value;
     }
     var min = 0;
@@ -108,7 +105,7 @@ var simpleplot = function (canvas, arr, customOptions) {
       arrScaled[i] = (h*(arr[i]-min)/(max-min));
     }
     // Draw caption
-    if (options.displayCaption) {
+    if (options.caption.enable) {
       ctx.fillStyle = options.caption.textColor;
       ctx.fillText(options.caption.text,options.xStart,options.yStart+10);
     }
@@ -127,13 +124,13 @@ var simpleplot = function (canvas, arr, customOptions) {
     ctx.beginPath();
     ctx.moveTo(options.xStart +T*0,  y - arrScaled[0]);
     // Plot lines
-    if (options.displayLines) {
+    if (options.lines.enable) {
       for (i = 0; i < arr.length; i++) {
         if (options.plotType.indexOf("bar")>=0)
           ctx.moveTo(options.xStart +T*i,  y); // draw line from y-axis (bar chart)
         ctx.lineTo(options.xStart +T*i,  y - arrScaled[i]); // draw line from last data point to this data point
         ctx.stroke();
-        if(options.displayValues) {
+        if(options.values.enable) {
           ctx.fillStyle = options.values.textColor;
           if (options.plotType.indexOf("bar")>=0)
             ctx.fillText(arrString[i],options.xStart+T*i-options.lines.thickness/2,y - arrScaled[i]);
@@ -144,9 +141,9 @@ var simpleplot = function (canvas, arr, customOptions) {
       }
     }
     // plot data points
-    if (options.displayPoints) {
+    if (options.points.enable) {
       for (i = 0; i < arr.length; i++) {
-        if (options.enableThresholdLine){
+        if (options.threshold.enable){
           if (arr[i] > options.threshold.value) {
             ctx.fillStyle = options.threshold.colorOverThreshold;
           }
@@ -171,7 +168,7 @@ var simpleplot = function (canvas, arr, customOptions) {
         canvasHoverObjects[i] = {x:options.xStart+T*i, y:y-arrScaled[i], w:options.points.radius, h:options.points.radius, value:hoverText}
       }
     }
-    if (options.enableThresholdLine) {
+    if (options.threshold.enable) {
       var scaledThresholdValue = (h*(options.threshold.value-min)/(max-min));
       ctx.strokeStyle = options.threshold.lineColor;
       ctx.lineWidth = options.threshold.lineWidth;
@@ -189,7 +186,7 @@ var simpleplot = function (canvas, arr, customOptions) {
       ctx.stroke();
     }
     // add event listener for mouse hover over data points
-    if (options.enableHover){
+    if (options.hover.enable){
       var imageOriginal = ctx.getImageData(0,0,canvas.width, canvas.height);
       canvas.addEventListener("mousemove", function (event) {
         if (canvasHoverObjects == null)

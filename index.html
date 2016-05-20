@@ -39,8 +39,8 @@ var example = (function () {
 
   // plot with threshold line
   simpleplot(c1, data, {
-    enableThresholdLine:true,
     threshold : {
+      enable : true,
       value : 5,
       lineColor : '#444',
       lineWidth : 2,
@@ -49,8 +49,8 @@ var example = (function () {
       textColor : '#ed0',
       formatThresholdValueFunction : function(val){return "threshold = " + val;}
     },
-    displayValues:false,
     values : {
+      enable : false,
       textColor : '#ccc'
     },
   });
@@ -64,24 +64,16 @@ var example = (function () {
     width:c1.width-100,
     height:c1.height-100,
     numPoints:data2.length,
-    displayAxes:false,
-    axes:{color:"#888",thickness:2},
-    displayCaption:false,
-    caption:{text :"my data", textColor:'#ed0'},
-    displayPoints:false,
-    points:{color:"rgba(0,0,0,0)",radius:null},
-    displayLines:true,
-    lines:{color:"rgba(100,100,100,0.5)",thickness:50},
-    displayValues:true,
+    axes:{enable:false},
+    caption:{enable:false},
+    points:{enable:false},
+    lines:{enable:true,color:"rgba(100,100,100,0.5)",thickness:50},
     values:{
+      enable:true,
       textColor:'#ccc',
       formatValuesFunction : function(float_val){return float_val.toFixed(2); }
     },
-    enableHover:true,
-    hover:{
-      color:null,
-      formatHoverInfoFunction:null
-    }
+    hover:{enable:false}
   });
 
   simpleplot(c2, data, {
@@ -92,21 +84,17 @@ var example = (function () {
     width:c1.width-100,
     height:c1.height-100,
     numPoints:data.length,
-    displayAxes:true,
-    axes:{color:"#888",thickness:2},
-    displayCaption:true,
-    caption:{text :"my data", textColor:'#ed0'},
-    displayPoints : true,
-    points:{color:"#0f0",radius:6},
-    displayLines:true,
-    lines:{color:"#888",thickness:5},
-    displayValues:false,
+    axes:{enable:true,color:"#888",thickness:2},
+    caption:{enable:true, text :"my data", textColor:'#ed0'},
+    points:{enable:true,color:"#0f0",radius:6},
+    lines:{enable:true,color:"#888",thickness:5},
     values:{
+      enable:false,
       textColor:'#ccc',
       formatValuesFunction:null
     },
-    enableHover:true,
     hover:{
+      enable:true,
       color:'yellow',
       formatHoverInfoFunction : function(x,y){return "(" + x + ", " + y + ")";}
     }
@@ -114,9 +102,6 @@ var example = (function () {
 
   // This is a plot with no canvas formatting or plot parameters
   simpleplot(c3, data);
-
-
-
 
 })();
 </script>
