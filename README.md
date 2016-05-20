@@ -33,13 +33,8 @@ Each simpleplot istance can be customized by passing in configuration parameters
 | width    | canvas.width-20  | width in pixels  |
 | height   | canvas.height-20 | height in pixels |
 | numPoints | array length | number of points to plot (can be greater than length of array) |
-| displayAxes | false  | boolean: show x- and y- axes |
-| axes | object | object with color and line thickness of axes, default: ```{color : '#888', thickness : 2}``` |
-| displayCaption | false | boolean: display plot caption |
-| caption | object | object with text and text color, default: ```{text : '', textColor : '#888'},``` |
-| displayPoints | true | |
-| points | object | {color: '#0c0', radius : 6} |
-| displayLines | true | | 
-| lines | object | {color: '#888', thickness: 6} |
-| displayValues | false | |
-| values | object | {textColor : '#888', formatValuesFunction : undefined} |
+| axes | object | object with color and line thickness of axes, default: ```{enable : false, color : '#888', thickness : 2}``` |
+| caption | object | object with text and text color, default: ```{enable : false, text : '', textColor : '#888'},``` |
+| points | object | ```{enable : true, color: '#0c0', radius : 6}``` |
+| lines | object | ```{enable : true, color: '#888', thickness: 6}``` |
+| values | object | ```{enable : false, textColor : '#888', formatValuesFunction : undefined}``` |
