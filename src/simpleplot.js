@@ -43,7 +43,7 @@ var simpleplot = function (canvas, arr, customOptions) {
     },
     values : {
       enable : false,
-      textColor : '#888',
+      textColor : '#444',
       formatValuesFunction : undefined
     },
     threshold : {
@@ -66,15 +66,20 @@ var simpleplot = function (canvas, arr, customOptions) {
 	var options = {};
 
   var init = function () {
+
+    customOptions = customOptions || {};
+
+    merge(options, customOptions, defaultOptions);
+
     // merge user options into default options
-		for (var o in defaultOptions) {
-			if (defaultOptions.hasOwnProperty(o)) {
-				options[o] = customOptions && typeof(customOptions[o]) !== 'undefined' ? customOptions[o] : defaultOptions[o];
-				if (typeof(options[o]) === 'function') {
-					options[o] = options[o].bind(this);
-				}
-			}
-		}
+    function merge (opts, customOpts, defaultOpts) {
+      for (var o in defaultOpts) {
+        opts[o] = typeof(customOpts[o]) !== 'undefined' ?  customOpts[o] : defaultOpts[o];
+        if (typeof(customOpts[o]) === 'object') {
+          merge(opts[o], customOpts[o], defaultOpts[o]);
+        }
+      }
+    }
 
     var T = options.width/options.numPoints; // step size x in pixels
     var x = options.xStart;
