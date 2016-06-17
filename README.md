@@ -15,16 +15,16 @@ Sample implemenations: http://mcmonty2600.github.io/simpleplot/
 
 ### Basic Example
 
-In the simplest case, a data plot is created by passing in a canvas element and an array of numbers, without additional configuration parameters 
+In the simplest case, a data plot is created by passing in a canvas element and an array of numbers, without additional configuration parameters
 ```
 <script>
-  data = [2,3,5,4,1,8,7]];
+  data = [2,3,5,4,1,8,5,3,4]];
   simpleplot(c3, data);
 </script>
 ```
 ![image failed to load](screenshots/plot_plain.PNG "basic plot without parameters and no canvas formatting")
 
-### Configuration 
+### Configuration
 
 Each simpleplot istance can be customized by passing in configuration parameters to overwrite default values.
 
@@ -49,7 +49,7 @@ Each simpleplot istance can be customized by passing in configuration parameters
 Optionally add a threshold line to the plot. Points above the threshold can be colored differently than below. Threshold is configurable with the **threshold** parameter object, which has attributes:
 
 | threshold attribute | Default |
-| ------------- | ------------- | 
+| ------------- | ------------- |
 | enable | false |
 | value | undefined |
 | lineColor | '#444' |
@@ -58,6 +58,3 @@ Optionally add a threshold line to the plot. Points above the threshold can be c
 | colorUnderThreshold | '#ef1e25' |
 | textColor | '#888' |
 | formatThresholdValueFunction | undefined |
-
-
-
